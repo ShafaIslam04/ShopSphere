@@ -1,0 +1,8 @@
+@layer components {
+    .btn{
+        @apply bg-[#26C6DA] text-white px-3 py-2 rounded-md 
+    }
+    .cart{
+        @apply p-3 rounded-md bg-white shadow-md 
+    }
+}
