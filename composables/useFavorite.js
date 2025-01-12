@@ -13,7 +13,6 @@ export const useFavorite = () =>{
             favorite.value.push(item);
             localStorage.setItem('favorite', JSON.stringify(favorite.value))
         }
-
     }
 
     const removeFavorite = (itemId) =>{

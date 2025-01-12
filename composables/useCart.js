@@ -9,12 +9,37 @@ export const useCart = () =>{
     })
 
     const addItemToCart = (item)=>{
+        const existingItem = cart.value.find((cartItem)=>cartItem.id ===item.id)
+        if(existingItem ){
+         existingItem.quantity +=1; 
+        }else{
+          cart.value.push({...item,quantity:1})
+
+        }
         
-        cart.value.push(item);
+
+
         localStorage.setItem('cart',JSON.stringify(cart.value))
+        
+        // cart.value.push(item);
+        // localStorage.setItem('cart',JSON.stringify(cart.value))
     }
 
-    const removeItem =(itemId)=>{
+
+    const removeItem = (itemId) => {
+        const existingItem = cart.value.find((cartItem) => cartItem.id === itemId); 
+        if (existingItem) {
+            if (existingItem.quantity > 1) {
+                existingItem.quantity -= 1; 
+            } else {
+                cart.value = cart.value.filter((cartItem) => cartItem.id !== itemId); 
+            }
+            localStorage.setItem('cart', JSON.stringify(cart.value)); 
+        }
+    };
+    
+
+    const removeItemCart =(itemId)=>{
         cart.value = cart.value.filter((cartItem)=>cartItem.id!==itemId)
         localStorage.setItem('cart',JSON.stringify(cart.value))
     }
@@ -22,7 +47,9 @@ export const useCart = () =>{
     return {
         cart,
         addItemToCart,
-        removeItem
+        removeItem,
+        removeItemCart
+        
     }
 
 }
